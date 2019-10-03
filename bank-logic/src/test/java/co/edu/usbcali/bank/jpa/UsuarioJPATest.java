@@ -111,10 +111,6 @@ class UsuarioJPATest {
 		assertNotNull(losUsuarios, "Objeto losClientes null");
 		assertFalse(losUsuarios.isEmpty());
 
-//		for (Cliente cliente : losClientes) {
-//			log.info(cliente.getNombre());
-//		}
-
 		losUsuarios.forEach(usuario -> {
 			log.info(usuario.getNombre());
 		});
