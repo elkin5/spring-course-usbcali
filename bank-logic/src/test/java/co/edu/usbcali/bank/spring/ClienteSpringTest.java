@@ -34,7 +34,7 @@ class ClienteSpringTest {
 
 	@Test
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	void test() {
+	void aTest() {
 		assertNotNull(entityManager, "El objeto entityManager esta nulo");
 		Cliente cliente = entityManager.find(Cliente.class, clieId);
 		assertNull(cliente, "El cliente con id " + clieId + " ya existe");
