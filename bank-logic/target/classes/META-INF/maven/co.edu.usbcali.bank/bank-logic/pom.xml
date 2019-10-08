@@ -5,6 +5,13 @@
 	<groupId>co.edu.usbcali.bank</groupId>
 	<artifactId>bank-logic</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<org.mapstruct.version>1.3.0.Final</org.mapstruct.version>
+		<org.springframework.version>5.1.10.RELEASE</org.springframework.version>
+	</properties>
 
 	<dependencies>
 

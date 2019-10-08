@@ -5,6 +5,12 @@
 	<groupId>co.edu.usbcali.bank</groupId>
 	<artifactId>bank-logic</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<org.springframework.version>5.1.10.RELEASE</org.springframework.version>
+	</properties>
 
 	<dependencies>
 
@@ -12,24 +18,22 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>5.1.10.RELEASE</version>
+			<version>${org.springframework.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
-			<version>5.1.10.RELEASE</version>
+			<version>${org.springframework.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>5.1.10.RELEASE</version>
+			<version>${org.springframework.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- Spring -->
-
-
 
 		<!-- Hibernate -->
 		<dependency>
