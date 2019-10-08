@@ -20,7 +20,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.usbcali.bank.domain.Cliente;
-import co.edu.usbcali.bank.repository.ITipoDocumentoRepository;
+import co.edu.usbcali.bank.repository.TipoDocumentoRepository;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration("/applicationContext.xml")
@@ -34,7 +34,7 @@ public class ClienteServiceTest {
 	ClienteService clienteService;
 	
 	@Autowired
-	ITipoDocumentoRepository tipoDocumentoRepository;
+	TipoDocumentoRepository tipoDocumentoRepository;
 	
 	@Test
 	@DisplayName("save")

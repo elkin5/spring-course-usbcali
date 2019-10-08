@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.usbcali.bank.domain.Cliente;
 import co.edu.usbcali.bank.dto.ClienteDTO;
+import co.edu.usbcali.bank.mapper.ClienteMapper;
 import co.edu.usbcali.bank.service.ClienteService;
 
 @RestController
@@ -18,13 +19,17 @@ public class ClienteController {
 
 	@Autowired
 	ClienteService clienteService;
-	
+
+	@Autowired
+	ClienteMapper clienteMapper;
+
 	@GetMapping("/findById/{id}")
 	public ClienteDTO findById(@PathVariable("id") Long id) {
 		Optional<Cliente> clienteOptional = clienteService.findById(id);
-		if(clienteOptional.isPresent() == false) {
+		if (clienteOptional.isPresent() == false) {
 			return null;
 		}
-		return null;
+		Cliente cliente = clienteOptional.get();
+		return clienteMapper.clienteToClienteDTO(cliente);
 	}
 }

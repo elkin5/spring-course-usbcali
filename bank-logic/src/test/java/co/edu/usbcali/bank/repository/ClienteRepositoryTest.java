@@ -27,9 +27,9 @@ import co.edu.usbcali.bank.domain.Cliente;
 class ClienteRepositoryTest {
 
 	@Autowired
-	IClienteRepository clienteRepository;
+	ClienteRepository clienteRepository;
 	@Autowired
-	ITipoDocumentoRepository tipoDocumentoRepository;
+	TipoDocumentoRepository tipoDocumentoRepository;
 
 	private final static Long clieId = 4565L;
 

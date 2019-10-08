@@ -14,8 +14,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.usbcali.bank.domain.Cliente;
-import co.edu.usbcali.bank.repository.IClienteRepository;
-import co.edu.usbcali.bank.repository.ITipoDocumentoRepository;
+import co.edu.usbcali.bank.repository.ClienteRepository;
+import co.edu.usbcali.bank.repository.TipoDocumentoRepository;
 
 //@Service se usa cuando es para lógica de negocio
 @Service
@@ -23,10 +23,10 @@ import co.edu.usbcali.bank.repository.ITipoDocumentoRepository;
 public class ClienteServiceImpl implements ClienteService{
 
 	@Autowired
-	IClienteRepository clienteRepository;
+	ClienteRepository clienteRepository;
 	
 	@Autowired
-	ITipoDocumentoRepository tipoDocumentoRepository;
+	TipoDocumentoRepository tipoDocumentoRepository;
 	
 	@Autowired
 	Validator validator;

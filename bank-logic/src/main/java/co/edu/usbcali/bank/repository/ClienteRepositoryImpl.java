@@ -13,7 +13,7 @@ import co.edu.usbcali.bank.domain.Cliente;
 
 @Repository
 @Scope("singleton")
-public class ClienteRepositoryImpl implements IClienteRepository {
+public class ClienteRepositoryImpl implements ClienteRepository {
 
 	@PersistenceContext
 	EntityManager entityManager;

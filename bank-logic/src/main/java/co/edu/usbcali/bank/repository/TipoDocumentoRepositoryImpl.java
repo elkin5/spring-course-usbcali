@@ -13,7 +13,7 @@ import co.edu.usbcali.bank.domain.TipoDocumento;
 
 @Repository
 @Scope("singleton")
-public class TipoDocumentoRepositoryImpl implements ITipoDocumentoRepository {
+public class TipoDocumentoRepositoryImpl implements TipoDocumentoRepository {
 
 	@PersistenceContext
 	EntityManager entityManager;

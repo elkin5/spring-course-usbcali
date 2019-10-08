@@ -12,7 +12,7 @@ public class ClienteDTO {
 	private Timestamp fechaModificacion;
 	private String nombre;
 	private String telefono;
-	private Long tipoDocumentoId;
+	private Long tdocId;
 
 	public Long getClieId() {
 		return clieId;
@@ -78,12 +78,12 @@ public class ClienteDTO {
 		this.telefono = telefono;
 	}
 
-	public Long getTipoDocumentoId() {
-		return tipoDocumentoId;
+	public Long getTdocId() {
+		return tdocId;
 	}
 
-	public void setTipoDocumentoId(Long tipoDocumentoId) {
-		this.tipoDocumentoId = tipoDocumentoId;
+	public void setTdocId(Long tdocId) {
+		this.tdocId = tdocId;
 	}
 
 }

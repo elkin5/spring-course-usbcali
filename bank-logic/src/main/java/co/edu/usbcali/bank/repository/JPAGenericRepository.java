@@ -3,7 +3,7 @@ package co.edu.usbcali.bank.repository;
 import java.util.List;
 import java.util.Optional;
 
-public interface IJPAGenericRepository<T, ID> {
+public interface JPAGenericRepository<T, ID> {
 
 	T save(T entity);
 
