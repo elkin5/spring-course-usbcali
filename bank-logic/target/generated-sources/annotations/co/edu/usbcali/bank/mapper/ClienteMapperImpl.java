@@ -24,8 +24,8 @@ public class ClienteMapperImpl implements ClienteMapper {
         ClienteDTO clienteDTO = new ClienteDTO();
 
         clienteDTO.setTdocId( clienteTipoDocumentoTdocId( cliente ) );
-        clienteDTO.setActivo( cliente.getActivo() );
         clienteDTO.setClieId( cliente.getClieId() );
+        clienteDTO.setActivo( cliente.getActivo() );
         clienteDTO.setDireccion( cliente.getDireccion() );
         clienteDTO.setEmail( cliente.getEmail() );
         clienteDTO.setFechaCreacion( cliente.getFechaCreacion() );
@@ -45,8 +45,8 @@ public class ClienteMapperImpl implements ClienteMapper {
         Cliente cliente = new Cliente();
 
         cliente.setTipoDocumento( clienteDTOToTipoDocumento( clienteDTO ) );
-        cliente.setActivo( clienteDTO.getActivo() );
         cliente.setClieId( clienteDTO.getClieId() );
+        cliente.setActivo( clienteDTO.getActivo() );
         cliente.setDireccion( clienteDTO.getDireccion() );
         cliente.setEmail( clienteDTO.getEmail() );
         cliente.setFechaCreacion( clienteDTO.getFechaCreacion() );

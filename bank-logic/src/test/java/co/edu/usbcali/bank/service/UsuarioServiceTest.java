@@ -1,4 +1,4 @@
-package co.edu.usbcali.bank.repository;
+package co.edu.usbcali.bank.service;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -21,18 +21,18 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.usbcali.bank.domain.Usuario;
+import co.edu.usbcali.bank.repository.TipoUsuarioRepository;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration("/applicationContext.xml")
 @Rollback(false)
-class UsuarioRepositoryTest {
+class UsuarioServiceTest {
 
-	private final static Logger log = LoggerFactory.getLogger(UsuarioRepositoryTest.class);
-
-	private final static String usua = "c4rl0t0";
+	private final static Logger log = LoggerFactory.getLogger(UsuarioServiceTest.class);
+	private final static String usua = "elkin5";
 
 	@Autowired
-	UsuarioRepository usuarioRepository;
+	UsuarioService usuarioService;
 
 	@Autowired
 	TipoUsuarioRepository tipoUsuarioRepository;
@@ -41,31 +41,34 @@ class UsuarioRepositoryTest {
 	@DisplayName("save")
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	void aTest() {
-		assertNotNull(usuarioRepository);
+		assertNotNull(usuarioService);
 		assertNotNull(tipoUsuarioRepository);
-		assertFalse(usuarioRepository.findById(usua).isPresent(), "El usuario ya existe");
+		assertFalse(usuarioService.findById(usua).isPresent(), "El usuario ya existe");
 
 		Usuario usuario = new Usuario();
 
 		usuario.setUsuUsuario(usua);
-		usuario.setNombre("Carloto Picons");
+		usuario.setNombre("elkin hurtad");
 		usuario.setIdentificacion(new BigDecimal("54689"));
-		usuario.setClave("c0ntr4");
+		usuario.setClave("knl");
 		usuario.setActivo("S");
 
 		assertTrue(tipoUsuarioRepository.findById(1L).isPresent(), "El tipo de usuario no existe");
 
 		usuario.setTipoUsuario(tipoUsuarioRepository.findById(1L).get());
-		usuarioRepository.save(usuario);
-
+		try {
+			usuarioService.save(usuario);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Test
 	@DisplayName("findById")
 	@Transactional(readOnly = true)
 	void bTest() {
-		assertNotNull(usuarioRepository, "El usuarioRepository es nulo");
-		Optional<Usuario> usuarioOptional = usuarioRepository.findById(usua);
+		assertNotNull(usuarioService, "El usuarioService es nulo");
+		Optional<Usuario> usuarioOptional = usuarioService.findById(usua);
 		assertTrue(usuarioOptional.isPresent());
 	}
 
@@ -73,8 +76,8 @@ class UsuarioRepositoryTest {
 	@DisplayName("update")
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	void cTest() {
-		assertNotNull(usuarioRepository, "El usuarioRepository es nulo");
-		Optional<Usuario> usuarioOptional = usuarioRepository.findById(usua);
+		assertNotNull(usuarioService, "El usuarioService es nulo");
+		Optional<Usuario> usuarioOptional = usuarioService.findById(usua);
 
 		assertTrue(usuarioOptional.isPresent(), "El usuario con id:" + usua + " no existe");
 
@@ -82,31 +85,37 @@ class UsuarioRepositoryTest {
 
 		usuario.setActivo("N");
 
-		usuarioRepository.save(usuario);
-
+		try {
+			usuarioService.update(usuario);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Test
 	@DisplayName("delete")
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	void dTest() {
-		assertNotNull(usuarioRepository, "El usuarioRepository es nulo");
-		Optional<Usuario> usuarioOptional = usuarioRepository.findById(usua);
+		assertNotNull(usuarioService, "El usuarioService es nulo");
+		Optional<Usuario> usuarioOptional = usuarioService.findById(usua);
 		assertTrue(usuarioOptional.isPresent(), "El usuario con id:" + usua + " no existe");
 
 		Usuario usuario = usuarioOptional.get();
 
-		usuarioRepository.delete(usuario);
-
+		try {
+			usuarioService.delete(usuario);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Test
 	@DisplayName("findAll")
 	@Transactional(readOnly = true)
 	void eTest() {
-		assertNotNull(usuarioRepository, "El usuarioRepository es nulo");
+		assertNotNull(usuarioService, "El usuarioService es nulo");
 
-		List<Usuario> losUsuarios = usuarioRepository.findAll();
+		List<Usuario> losUsuarios = usuarioService.findAll();
 
 		assertNotNull(losUsuarios);
 		assertFalse(losUsuarios.isEmpty());
@@ -114,7 +123,6 @@ class UsuarioRepositoryTest {
 		losUsuarios.forEach(usuario -> {
 			log.info(usuario.getNombre());
 		});
-
 	}
 
 }

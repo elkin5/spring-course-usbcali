@@ -77,6 +77,7 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	@Transactional(readOnly = true, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public Cliente update(Cliente cliente) throws Exception {
+		validar(cliente);
 
 		if (clienteRepository.findById(cliente.getClieId()).isPresent() == false) {
 			throw new Exception("El cliente con id: " + cliente.getClieId() + " No existe");

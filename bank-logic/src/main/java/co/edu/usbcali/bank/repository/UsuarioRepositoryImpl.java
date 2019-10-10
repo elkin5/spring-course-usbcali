@@ -13,11 +13,11 @@ import co.edu.usbcali.bank.domain.Usuario;
 
 @Repository
 @Scope("singleton")
-public class UsuarioRepositoryImpl implements UsuarioRepository{
+public class UsuarioRepositoryImpl implements UsuarioRepository {
 
 	@PersistenceContext
 	EntityManager entityManager;
-	
+
 	@Override
 	public Usuario save(Usuario entity) {
 		entityManager.persist(entity);
@@ -31,18 +31,18 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
 
 	@Override
 	public List<Usuario> findAll() {
-		return entityManager.createQuery("FROM Usuario").getResultList();
+		return entityManager.createQuery("FROM Usuario", Usuario.class).getResultList();
 	}
 
 	@Override
 	public void delete(Usuario entity) {
-		entityManager.remove(entity);		
+		entityManager.remove(entity);
 	}
 
 	@Override
 	public void deleteById(String id) {
-		findById(id).ifPresent(Usua->delete(Usua));
-		
+		findById(id).ifPresent(Usua -> delete(Usua));
+
 	}
 
 }
