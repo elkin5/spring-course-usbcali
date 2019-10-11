@@ -56,7 +56,7 @@ class UsuarioControllerTest {
 		RestTemplate restTemplate = new RestTemplate();
 
 		UsuarioDTO result = restTemplate.getForObject(url + "findById/" + usua, UsuarioDTO.class);
-		assertNotNull(result, "El cliente no existe");
+		assertNotNull(result, "El usuario no existe");
 	}
 
 	@Test
@@ -65,6 +65,7 @@ class UsuarioControllerTest {
 		RestTemplate restTemplate = new RestTemplate();
 
 		Object[] results = restTemplate.getForObject(url + "findAll/", Object[].class);
+		log.info(results.toString());
 		assertNotNull(results);
 	}
 

@@ -5,49 +5,49 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-
 /**
  * The persistent class for the transaccion database table.
  * 
  */
 @Entity
-@NamedQuery(name="Transaccion.findAll", query="SELECT t FROM Transaccion t")
+@NamedQuery(name = "Transaccion.findAll", query = "SELECT t FROM Transaccion t")
 public class Transaccion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="tran_id")
+	@Column(name = "tran_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long tranId;
 
 	private Timestamp fecha;
 
-	@Column(name="fecha_creacion")
+	@Column(name = "fecha_creacion")
 	private Timestamp fechaCreacion;
 
-	@Column(name="fecha_modificacion")
+	@Column(name = "fecha_modificacion")
 	private Timestamp fechaModificacion;
 
-	@Column(name="usu_creador")
+	@Column(name = "usu_creador")
 	private String usuCreador;
 
-	@Column(name="usu_modificador")
+	@Column(name = "usu_modificador")
 	private String usuModificador;
 
 	private BigDecimal valor;
 
-	//bi-directional many-to-one association to Cuenta
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="cuen_id")
+	// bi-directional many-to-one association to Cuenta
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "cuen_id")
 	private Cuenta cuenta;
 
-	//bi-directional many-to-one association to TipoTransaccion
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="titr_id")
+	// bi-directional many-to-one association to TipoTransaccion
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "titr_id")
 	private TipoTransaccion tipoTransaccion;
 
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="usu_usuario")
+	// bi-directional many-to-one association to Usuario
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "usu_usuario")
 	private Usuario usuario;
 
 	public Transaccion() {
