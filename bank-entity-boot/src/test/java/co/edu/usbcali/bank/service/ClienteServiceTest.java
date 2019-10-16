@@ -26,104 +26,130 @@ import co.edu.usbcali.bank.repository.TipoDocumentoRepository;
 @SpringBootTest
 @Rollback(false)
 public class ClienteServiceTest {
-	
+
 	private final static Long clieId = 4560L;
 	private final static Logger log = LoggerFactory.getLogger(ClienteServiceTest.class);
-	
+
 	@Autowired
 	ClienteService clienteService;
-	
+
 	@Autowired
 	TipoDocumentoRepository tipoDocumentoRepository;
-	
+
 	@Test
 	@DisplayName("save")
 	void aTest() {
 		assertNotNull(clienteService);
 		assertNotNull(tipoDocumentoRepository);
-		
+
 		Cliente cliente = new Cliente();
-		
+
 		cliente.setActivo("S");
 		cliente.setClieId(clieId);
 		cliente.setDireccion("Avenida Siempre Viva 123");
 		cliente.setEmail("homeroJSimpson@gmail.com");
 		cliente.setNombre("Homero J Simpson");
 		cliente.setTelefono("555 555 555");
-		
-		assertTrue(tipoDocumentoRepository.findById(1L).isPresent(),"El tipo de documento no existe");
+
+		assertTrue(tipoDocumentoRepository.findById(1L).isPresent(), "El tipo de documento no existe");
 		cliente.setTipoDocumento(tipoDocumentoRepository.findById(1L).get());
-		
+
 		try {
 			clienteService.save(cliente);
 		} catch (Exception e) {
-			assertNull(e,e.getMessage());
+			assertNull(e, e.getMessage());
 		}
-		
+
 	}
-	
+
 	@Test
-	@DisplayName("findById")	
+	@DisplayName("findById")
 	void bTest() {
-		assertNotNull(clienteService,"El clienteService es nulo");
+		assertNotNull(clienteService, "El clienteService es nulo");
 		Optional<Cliente> clienteOptional = clienteService.findById(clieId);
 		assertTrue(clienteOptional.isPresent());
-		
+
 	}
-	
 
 	@Test
 	@DisplayName("update")
 	@Transactional
 	void cTest() {
-		assertNotNull(clienteService,"El clienteService es nulo");
+		assertNotNull(clienteService, "El clienteService es nulo");
 		Optional<Cliente> clienteOptional = clienteService.findById(clieId);
-		assertTrue(clienteOptional.isPresent(),"El cliente con id:"+clieId+" no existe");
-		
-		Cliente cliente = clienteOptional.get();			
-		
-		cliente.setActivo("N");		
-		
+		assertTrue(clienteOptional.isPresent(), "El cliente con id:" + clieId + " no existe");
+
+		Cliente cliente = clienteOptional.get();
+
+		cliente.setActivo("N");
+
 		try {
 			clienteService.update(cliente);
 		} catch (Exception e) {
-			assertNull(e,e.getMessage());
-		}		
-		
+			assertNull(e, e.getMessage());
+		}
+
 	}
-	
+
 	@Test
-	@DisplayName("delete")	
+	@DisplayName("delete")
 	void dTest() {
-		assertNotNull(clienteService,"El clienteService es nulo");
-		Optional<Cliente> clienteOptional = clienteService.findById(clieId);		
-		assertTrue(clienteOptional.isPresent(),"El cliente con id:"+clieId+" no existe");		
-		Cliente cliente = clienteOptional.get();	
-		
+		assertNotNull(clienteService, "El clienteService es nulo");
+		Optional<Cliente> clienteOptional = clienteService.findById(clieId);
+		assertTrue(clienteOptional.isPresent(), "El cliente con id:" + clieId + " no existe");
+		Cliente cliente = clienteOptional.get();
+
 		try {
 			clienteService.delete(cliente);
 		} catch (Exception e) {
-			assertNull(e,e.getMessage());
+			assertNull(e, e.getMessage());
 		}
-				
-		
+
 	}
-	
-	
+
 	@Test
-	@DisplayName("findAll")	
+	@DisplayName("findAll")
 	void eTest() {
-		assertNotNull(clienteService,"El clienteService es nulo");
+		assertNotNull(clienteService, "El clienteService es nulo");
 
 		List<Cliente> losClientes = clienteService.findAll();
-		
+
 		assertNotNull(losClientes);
-		assertFalse(losClientes.isEmpty());	
-		
-		losClientes.forEach(cliente->{
-			log.info(cliente.getNombre()
-					);
-			});
+		assertFalse(losClientes.isEmpty());
+
+		losClientes.forEach(cliente -> {
+			log.info(cliente.getNombre());
+		});
+	}
+
+	@Test
+	@DisplayName("findByNombre")
+	void fTest() {
+		assertNotNull(clienteService, "El clienteService es nulo");
+
+		List<Cliente> losClientes = clienteService.findByNombre("Elkin Hurtado");
+
+		assertNotNull(losClientes);
+		assertFalse(losClientes.isEmpty());
+
+		losClientes.forEach(cliente -> {
+			log.info(cliente.getNombre());
+		});
+	}
+
+	@Test
+	@DisplayName("findByNombreLike")
+	void gTest() {
+		assertNotNull(clienteService, "El clienteService es nulo");
+
+		List<Cliente> losClientes = clienteService.findByNombreLike("Elkin%");
+
+		assertNotNull(losClientes);
+		assertFalse(losClientes.isEmpty());
+
+		losClientes.forEach(cliente -> {
+			log.info(cliente.getNombre());
+		});
 	}
 
 }

@@ -87,20 +87,7 @@ public class ClienteServiceImpl implements ClienteService {
 			throw new Exception("El tipo de documento con id: " + cliente.getClieId() + "No existe");
 		}
 
-		Cliente entity = clienteRepository.findById(cliente.getClieId()).get();
-//		 Soluci�n 1: Como no existe la transaccionalidad en el JUnit colocando en memoria dos objetos cliente diferentes
-		entity.setActivo(cliente.getActivo());
-		entity.setDireccion(cliente.getDireccion());
-		entity.setEmail(cliente.getEmail());
-		entity.setFechaCreacion(cliente.getFechaCreacion());
-		entity.setFechaModificacion(cliente.getFechaModificacion());
-		entity.setNombre(cliente.getNombre());
-		entity.setTelefono(cliente.getTelefono());
-		entity.setTipoDocumento(cliente.getTipoDocumento());
-		entity.setUsuCreador(cliente.getUsuCreador());
-		entity.setUsuModificador(cliente.getUsuModificador());
-
-		return clienteRepository.save(entity);
+		return clienteRepository.save(cliente);
 	}
 
 	@Override
@@ -153,6 +140,19 @@ public class ClienteServiceImpl implements ClienteService {
 		}
 
 		delete(findById(id).get());
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public List<Cliente> findByNombre(String nombre) {	
+		return clienteRepository.findByNombre(nombre);
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public List<Cliente> findByNombreLike(String nombre) {
+		
+		return clienteRepository.findByNombreLike(nombre);
 	}
 
 }
