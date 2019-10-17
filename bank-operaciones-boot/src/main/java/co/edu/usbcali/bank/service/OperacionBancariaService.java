@@ -2,7 +2,7 @@ package co.edu.usbcali.bank.service;
 
 import java.math.BigDecimal;
 
-public interface OperacionBancaria {
+public interface OperacionBancariaService {
 	public Long retirar(String cuenId, BigDecimal valor, String usuUsuario) throws Exception;
 
 	public Long consignar(String cuenId, BigDecimal valor, String usuUsuario) throws Exception;

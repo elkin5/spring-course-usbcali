@@ -8,14 +8,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.usbcali.bank.dto.TransaccionDTO;
-import co.edu.usbcali.bank.service.OperacionBancaria;
+import co.edu.usbcali.bank.dto.TransferenciaDTO;
+import co.edu.usbcali.bank.service.OperacionBancariaService;
 
 @RestController
 @RequestMapping("/api/operaciones")
 public class OperacionBancariaController {
 
 	@Autowired
-	OperacionBancaria operacionBancaria;
+	OperacionBancariaService operacionBancaria;
+
+	@PostMapping("/transferir")
+	public ResponseEntity<?> transferir(@RequestBody TransferenciaDTO transferenciaDTO) {
+		try {
+			Long idTransaccion = operacionBancaria.trasferencia(transferenciaDTO.getCuenIdOrigen(),
+					transferenciaDTO.getCuenIdDestino(), transferenciaDTO.getValor(), transferenciaDTO.getUsuUsuario());
+
+			return ResponseEntity.ok().body(idTransaccion);
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body(new ResponseError(400, e.getMessage()));
+		}
+	}
 
 	@PostMapping("/consignar")
 	public ResponseEntity<?> consignar(@RequestBody TransaccionDTO transaccionDTO) {

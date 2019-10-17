@@ -21,7 +21,7 @@ import co.edu.usbcali.bank.repository.UsuarioRepository;
 
 @Service
 @Scope("singleton")
-public class OperacionBancariaImpl implements OperacionBancaria {
+public class OperacionBancariaServiceImpl implements OperacionBancariaService {
 
 	@Autowired
 	CuentaRepository cuentaRepository;
